@@ -249,7 +249,7 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-For processing the video frames, the `pipeline_process_update()` method (cell 113) performs the same as processing an image, except that I store the detected rectangles (from `find_cars()`) of `22` previous frames to the `prev_rects` of class `Vehicle_Detect()`. I used these to feed to the heatmap, threshold (more than half of detected rectangles), and label. This helps the implementation performing very well, empirically, as the rectangles don't pop/disappear too quick.      
+For processing the video frames, the `pipeline_process_update()` method (cell 164) performs the same as processing an image, except that I store the detected rectangles (from `find_cars()`) of `22` previous frames to the `prev_rects` of class `Vehicle_Detect()` (in cell 163). I used these to feed to the heatmap, threshold (more than half of detected rectangles), and label. This helps the implementation performing very well, empirically, as the rectangles don't pop/disappear too quick.      
 
 ---
 ### Discussion
