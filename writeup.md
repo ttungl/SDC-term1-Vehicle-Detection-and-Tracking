@@ -205,7 +205,7 @@ From the results obtained as above, I observed that the parameters corresponding
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-As shown in `cell 15`, I first created a classifier using `LinearSVC()`. Then, I trained a linear SVM using `fit()` method, and obtained the test accuracy using `score()` method. I used `predict()` to obtain the predicted results. 
+As shown in `cell 142`, I first created a classifier using `LinearSVC()`. Then, I trained a linear SVM using `fit()` method, and obtained the test accuracy using `score()` method. I used `predict()` to obtain the predicted results. 
 
 ### Sliding Window Search
 
