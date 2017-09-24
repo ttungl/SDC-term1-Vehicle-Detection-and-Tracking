@@ -221,7 +221,7 @@ The images below indicate the all sliding window searches with various overlaps 
 
 <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">  <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window4.png"> 
 
-Thereby, the combined results of different configurations in various window sizes is as below. The rectangles are returned from `find_cars()` method. It indicates that there are some overlaps on the detected cars and falsely positive one. 
+Thereby, the combined results of different configurations in various window sizes is as below. The rectangles are returned from `find_cars()` method. It indicates that there are some overlaps on the detected cars and falsely positive one. Note that, I have also tried to adjust the `scale` less than `1.0` but it didn't work.
 
 <img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles.png">
 
@@ -229,7 +229,7 @@ Now, from the above result, I used the heatmap and threshold to eliminate the fa
 
 <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/add_heatmap.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold_gray.png"> 
 
-Then, the thresholded heatmap image is labeled using `label` from `scipy.ndimage.measurements`. Finally, the (true positive) detected rectangles are drawn on the image as below.
+Then, the thresholded heatmap image is labeled using `label` from `scipy.ndimage.measurements` to identify individual blobs in the heatmap. Finally, the (true positive) detected rectangles are drawn on the image as below.
 
 <img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/draw_rectangles.png">
 
@@ -247,24 +247,16 @@ The implementation performs perfect, detecting the near and far vehicles in the 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./project_video.mp4)
 
-
-
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
-
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
-
-### Here are six frames and their corresponding heatmaps:
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
+For processing the video frames, the `pipeline_process_update()` method (cell 113) performs the same as processing an image, except that I store the detected rectangles (from `find_cars()`) of `22` previous frames to the `prev_rects` of class `Vehicle_Detect()`. I used these to feed to the heatmap, threshold (more than half of detected rectangles), and label. This helps the implementation performing very well, empirically, as the rectangles don't pop/disappear too quick.      
 
 ---
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+My pipeline performs perfectly without any issues. One problem that I have faced was the rectangles were appeared and then disappeared too quick. To overcome this, I used the `Vehicle_Detect` class to store the previous frames' detected rectangles to feed to the heatmap, threshold, and level. This helps to fix the issue. 
+
+One technique can be used to boost the performance is using the [YOLO](https://pjreddie.com/darknet/yolo/). I will implement this when I have more time.
 
