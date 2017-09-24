@@ -213,26 +213,30 @@ As shown in `cell 15`, I first created a classifier using `LinearSVC()`. Then, I
 
 The sliding window search method is inherited from `find_cars()` method from the lesson. The method extracts the individual channel HOG features for the entire image, then the full image features are subsampled to the window size to feed to the classifier. The method performs the prediction based on HOG features for each window and then returns a number of rectangles that are predicted as detected cars.   
 
-The image below shows the number of cars detected, it contains overlapping rectangles (brown ones) and falsely positive rectangles (green one). 
+The image below shows the number of cars detected, it contains overlapping rectangles (brown ones) and falsely positive rectangles (green one). Note that, this result is for only one configuration of `ystart` = `400`, `ystop` = `656`, and `scale`=1.5. 
+
 <img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window.png"> 
 
-The images below indicate the all sliding window searches with various overlaps in both X and Y axes.  
+The images below indicate the all sliding window searches with various overlaps in both X and Y axes, with small, medium, and large window sizes as in cells 25, 26, 106, respectively. 
+
 <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">  <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window4.png"> 
 
-<!-- <img width="320" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window3.png"> -->
+Thereby, the combined results of different configurations in various window sizes is as below. The rectangles are returned from `find_cars()` method. It indicates that there are some overlaps on the detected cars and falsely positive one. 
 
 <img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles.png">
 
-<!-- <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles0.png"> -->
+Now, from the above result, I used the heatmap and threshold to eliminate the falsely positive rectangles (usually only one detection). First, `add_heat` method takes the detected rectangles from `find_cars()` and forms the heatmap image where the overlapping rectangles reside as in the left result. Then, I applied the zero out pixels below `threshold`, so it eliminates the falsely positive rectangles as shown in the middle and the right ones.
 
 <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/add_heatmap.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold_gray.png"> 
+
+Then, the thresholded heatmap image is labeled using `label` from `scipy.ndimage.measurements`. Finally, the (true positive) detected rectangles are drawn on the image as below.
 
 <img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/draw_rectangles.png">
 
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-<img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_SupportVectorMachine.png">
+<img width="850" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_SupportVectorMachine.png">
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
