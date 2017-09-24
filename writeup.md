@@ -56,8 +56,9 @@ In the images above, I obtained the HOG features using configurations `orient`= 
 
 I also tested with different configurations of `color_space`, `hog_channel`, `orient`, and `pix_per_cell`. The sizes of `car_features` and `noncar_features` are `8792` and `8968`, respectively. The table below shows the various extracted times for each configuration that I have explored.
 
-| No     | ColorSpace | Orient       | Pixels Per Cell | HOG Channel | Extracted Time(s) |
-| :----: | :--------: | :----------: | :-------------: | :---------: | ---------------:|
+
+| No     | ColorSpace | Orient       | Pixels Per Cell | HOG Channel | Extracted Time (s) |
+| :----: | :--------: | :----------: | :-------------: | :---------: | --------------:|
 | 1      | RGB        | 8            | 8               | 2      	 | 30.5448	       |
 | 2      | RGB        | 8            | 12              | 2      	 | 22.87939	       |
 | 3      | RGB        | 8            | 16              | 2      	 | 21.77754	       |
@@ -108,118 +109,114 @@ I also tested with different configurations of `color_space`, `hog_channel`, `or
 | 48     | LUV        | 11           | 16              | ALL	 	 | 54.12637		   |
 | 49     | YUV        | 8            | 8               | 2	     	 | 28.5655	       |
 | 50     | YUV        | 8            | 12              | 2	    	 | 21.32812	       |
-| 51     | YUV        | 8            | 16              | 2	         | 75.53337	       |
-| 52     | YUV        | 11           | 8	           | 2	         | 62.8071	       |
-| 53     | YUV        | 11           | 12              | 2	         | 59.53764	       |
-| 54     | YUV        | 11           | 16              | 2	   	 	 | 31.24532	       |
-| 55     | YUV        | 8            | 8	           | ALL	   	 | 22.53092	       |
-| 56     | YUV        | 8            | 12              | ALL	   	 | 21.72739	       |
-| 57     | YUV        | 8            | 16              | ALL	   	 | 30.96028	       |
-| 58     | YUV        | 11           | 8               | ALL	   	 | 23.11023	       |
-| 59     | YUV        | 11           | 12              | ALL	   	 | 22.52908	       |
-| 60     | YUV        | 11           | 16              | ALL	   	 | 74.14904	       |
-| 61     | YCrCb      | 8            | 8	           | 2	     	 | 50.25714	       |
-| 62     | YCrCb      | 8            | 12              | 2	     	 | 47.83314	       |
-| 63     | YCrCb      | 8            | 16              | 2	     	 | 76.50115	       |
-| 64     | YCrCb      | 11           | 8               | 2	     	 | 944.93221	   |
-| 65     | YCrCb      | 11           | 12              | 2	     	 | 60.16057	       |
-| 66     | YCrCb      | 11           | 16              | 2	    	 | 31.15222	       |
-| 67     | YCrCb      | 8            | 8               | ALL	   	 | 50.25714	       |
-| 68     | YCrCb      | 8            | 12              | ALL    	 | 47.83314	       |
-| 69     | YCrCb      | 8            | 16              | ALL	   	 | 76.50115	       |
-| 70     | YCrCb      | 11           | 8	           | ALL	   	 | 944.93221	   |
-| 71     | YCrCb      | 11           | 12              | ALL	   	 | 60.16057	       |
-| 72     | YCrCb      | 11           | 16              | ALL	   	 | 31.15222	       |
+| 51     | YUV        | 8            | 16              | 2	         | 22.29023	   |
+| 52     | YUV        | 11           | 8	           | 2	         | 31.1985	   |
+| 53     | YUV        | 11           | 12              | 2	         | 24.73312	   |
+| 54     | YUV        | 11           | 16              | 2	   	 	 | 22.23977	   |
+| 55     | YUV        | 8            | 8	           | ALL	   	 | 73.98175	   |
+| 56     | YUV        | 8            | 12              | ALL	   	 | 48.06844    |
+| 57     | YUV        | 8            | 16              | ALL	   	 | 45.44458	   |
+| 58     | YUV        | 11           | 8               | ALL	   	 | 74.28496	   |
+| 59     | YUV        | 11           | 12              | ALL	   	 | 53.30763	   |
+| 60     | YUV        | 11           | 16              | ALL	   	 | 46.96956	   |
+| 61     | YCrCb      | 8            | 8	           | 2	     	 | 29.37965	   |
+| 62     | YCrCb      | 8            | 12              | 2	     	 | 24.49854	   |
+| 63     | YCrCb      | 8            | 16              | 2	     	 | 22.22448	   |
+| 64     | YCrCb      | 11           | 8               | 2	     	 | 33.09982	   |
+| 65     | YCrCb      | 11           | 12              | 2	     	 | 24.07404	   |
+| 66     | YCrCb      | 11           | 16              | 2	    	 | 22.83741	   |
+| 67     | YCrCb      | 8            | 8               | ALL	   	 | 76.33727	   |
+| 68     | YCrCb      | 8            | 12              | ALL    	 | 51.09298    |
+| 69     | YCrCb      | 8            | 16              | ALL	   	 | 47.65726	   |
+| 70     | YCrCb      | 11           | 8	           | ALL	   	 | 80.50953	   |
+| 71     | YCrCb      | 11           | 12              | ALL	   	 | 56.51481	   |
+| 72     | YCrCb      | 11           | 16              | ALL	   	 | 53.57784	   |
+
+
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-####2. Explain how you settled on your final choice of HOG parameters.
-I 
 I tried various combinations of parameters with training process using SVM classifier and then I obtained the prediction time of the SVM classifier as below. 
+
+
+| No     |  Test Accuracy  | Training time (s)| Prediction time (s) |
+| :----: | :-------------: | :----------: | :-------------: |
+| 1      |            |              |                 |
+| 2      |            |              |                 |
+| 3      |            |              |                 |
+| 4      |            |              |                 |
+| 5      |            |              |                 |
+| 6      |            |              |                 |
+| 7      |            |              |                 |
+| 8      |            |              |                 |
+| 9      |            |              |                 |
+| 10     |            |              |                 |
+| 11     |            |              |                 |
+| 12     |            |              |                 |
+| 13     |            |              |                 |
+| 14     |            |              |                 |
+| 15     |            |              |                 |
+| 16     |            |              |                 |
+| 17     |            |              |                 |
+| 18     |            |              |                 |
+| 19     |            |              |                 |
+| 20     |            |              |                 |
+| 21     |            |              |                 |
+| 22     |            |              |                 |
+| 23     |            |              |                 |
+| 24     |            |              |                 |
+| 25     |            |              |                 |
+| 26     |            |              |                 |
+| 27     |            |              |                 |
+| 28     |            |              |                 |
+| 29     |            |              |                 |
+| 30     |            |              |                 |
+| 31     |            |              |    	           |
+| 32     |            |              |                 |
+| 33     |            |              |                 |
+| 34     |            |              |                 |
+| 35     |            |              |                 |
+| 36     |            |              |                 |
+| 37     |            |              |                 |
+| 38     |            |              |                 |
+| 39     |            |              |                 |
+| 40     |            |              |                 |
+| 41     |            |              |                 |
+| 42     |            |              |                 |
+| 43     |            |              |                 |
+| 44     |            |              |                 |
+| 45     |            |              |                 |
+| 46     |            |              |    	           |
+| 47     |            |              |                 |
+| 48     |            |              |                 |
+| 49     |            |              |                 |
+| 50     |            |              |                 |
+| 51     |            |              |                 |
+| 52     |            |              |    	           |
+| 53     |            |              |                 |
+| 54     |            |              |                 |
+| 55     |            |              |    	           |
+| 56     |            |              |                 |
+| 57     |            |              |                 |
+| 58     |            |              |                 |
+| 59     |            |              |                 |
+| 60     |            |              |                 |
+| 61     |            |              |    	           |
+| 62     |            |              |                 |
+| 63     |            |              |                 |
+| 64     |            |              |                 |
+| 65     |            |              |                 |
+| 66     |            |              |                 |
+| 67     |            |              |                 |
+| 68     |            |              |                 |
+| 69     |            |              |                 |
+| 70     |            |              |    	           |
+| 71     |            |              |                 |
+| 72     |            |              |                 |
+
+
+
+
+
 
 | :---------------------------------------------------------------------: |
 |		   			SVM classifier (LinearSVC)				   			  |
