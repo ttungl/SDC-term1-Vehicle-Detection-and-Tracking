@@ -213,12 +213,12 @@ I tried various combinations of parameters with training process using SVM class
 | 71     |    0.97860        |     2.49796         |    0.00151             |
 | 72     |    0.98338        |    1.03799          |    0.00143             |
 
+From the results obtained as above, I observed that the parameters corresponding to the line `60` yield the best result, in terms of the test accuracy `98.423`% and the training time `1.10413` seconds. The configuration for this is: `color_space`=`YUV`, `hog_channel`=`ALL`, `orient`= `11`, `pix_per_cell`=`16`, `cell_per_block`= `2`.
 
 
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
-
-I trained a linear SVM using...
+As shown in `cell 15`, I first created a classifier using `LinearSVC()`. Then, I trained a linear SVM using `fit()` method, and obtained the test accuracy using `score()` method. I used `predict()` to obtain the predicted results. 
 
 ###Sliding Window Search
 
