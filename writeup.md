@@ -14,15 +14,28 @@ The goals / steps of this project are the following:
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
-[//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
+<img src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/alf.gif" height="303" width="550">
+
+
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/add_heatmap.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG1.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG2.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG3.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/data_exploration.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles0.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/draw_rectangles.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold_gray.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG1.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG2.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG3.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_decision_tree.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_SupportVectorMachine.png">
+
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
