@@ -18,7 +18,7 @@ The goals / steps of this project are the following:
 
 My results are below.
 
-<img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/blue.gif" height="303" width="167"> <img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/color.gif" height="303" width="168">
+<img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/blue.gif" height="167" width="303"> <img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/color.gif" height="168" width="303">
 
 I will consider the [rubric points](https://review.udacity.com/#!/rubrics/513/view) individually and describe how I addressed each point in my implementation.  
 
@@ -244,7 +244,7 @@ The implementation performs perfect, detecting the near and far vehicles in the 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./project_video.mp4)
 
-<img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/blue.gif" height="303" width="167">
+<img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/blue.gif" height="167" width="303">
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
