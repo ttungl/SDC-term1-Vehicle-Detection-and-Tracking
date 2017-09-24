@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 <!-- <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_decision_tree.png"> -->
 
 
-I will consider the [rubric points]](https://review.udacity.com/#!/rubrics/513/view) individually and describe how I addressed each point in my implementation.  
+I will consider the [rubric points](https://review.udacity.com/#!/rubrics/513/view) individually and describe how I addressed each point in my implementation.  
 
 ### Histogram of Oriented Gradients (HOG)
 
