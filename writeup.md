@@ -16,12 +16,9 @@ The goals / steps of this project are the following:
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
-<!-- <img src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/alf.gif" height="303" width="550"> -->
+My results are below.
 
-
-
-<!-- <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_decision_tree.png"> -->
-
+<img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/blue.gif" height="303" width="167"> <img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/color.gif" height="303" width="168">
 
 I will consider the [rubric points](https://review.udacity.com/#!/rubrics/513/view) individually and describe how I addressed each point in my implementation.  
 
@@ -246,6 +243,8 @@ The implementation performs perfect, detecting the near and far vehicles in the 
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./project_video.mp4)
+
+<img src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/blue.gif" height="303" width="167">
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
