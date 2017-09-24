@@ -9,8 +9,9 @@
 The goals / steps of this project are the following:
 
 * Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
-* Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
+	+ Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
+	+ Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
+
 * Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
@@ -199,7 +200,7 @@ I tried various combinations of parameters with training process using SVM class
 | 71     |    0.97860        |     2.49796         |    0.00151             |
 | 72     |    0.98338        |    1.03799          |    0.00143             |
 
-From the results obtained as above, I observed that the parameters corresponding to the line `60` has the best result, in terms of the test accuracy `98.423`% and the training time `1.10413` seconds. The configuration for this is: `color_space`=`YUV`, `hog_channel`=`ALL`, `orient`= `11`, `pix_per_cell`=`16`, `cell_per_block`= `2`.
+From the results obtained as above, I observed that the parameters corresponding to the line `60` has the best result, in terms of the test accuracy `98.423`% and the training time `1.10413` seconds. The best configuration for my case is: `color_space`=`YUV`, `hog_channel`=`ALL`, `orient`= `11`, `pix_per_cell`=`16`, `cell_per_block`= `2`.
 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
@@ -210,9 +211,13 @@ As shown in `cell 15`, I first created a classifier using `LinearSVC()`. Then, I
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-The sliding window search method is inherited from `find_cars()` method from the lesson. The method extracts the individual channel HOG features for the entire image, then the full image features are subsampled to the window size to feed to the classifier. 
+The sliding window search method is inherited from `find_cars()` method from the lesson. The method extracts the individual channel HOG features for the entire image, then the full image features are subsampled to the window size to feed to the classifier. The method performs the prediction based on HOG features for each window and then returns a number of rectangles that are predicted as detected cars.   
 
-<img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">  <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png"> 
+The image below shows the number of cars detected, it contains overlapping rectangles (brown ones) and falsely positive rectangles (green one). 
+<img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window.png"> 
+
+The images below indicate the all sliding window searches with various overlaps in both X and Y axes.  
+<img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">  <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window4.png"> 
 
 <!-- <img width="320" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window3.png"> -->
 
