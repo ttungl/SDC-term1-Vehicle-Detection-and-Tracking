@@ -57,8 +57,6 @@ In the images above, I obtained the HOG features using configurations `orient`= 
 I also tested with different configurations of `color_space`, `hog_channel`, `orient`, and `pix_per_cell`. The sizes of `car_features` and `noncar_features` are `8792` and `8968`, respectively. The table below shows the various extracted times for each configuration that I have explored.
 
 | :------------------------------------------------------------------------------------: |
-|							Configuration Exploration									 |
-| :------------------------------------------------------------------------------------: |
 |  No.  | `color_space` | hog_channel  |  orient  |  pix_per_cell  |  Extracted Time (s) |
 | :---: | :-----------: | :----------: | :------: | :------------: | :-----------------: |
 |   1   |      RGB      |      2	   |  	8     |       8	   	   |	 30.5448		 |
