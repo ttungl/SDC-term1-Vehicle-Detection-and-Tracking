@@ -15,59 +15,219 @@ The goals / steps of this project are the following:
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
-<img src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/alf.gif" height="303" width="550">
+<!-- <img src="https://github.com/ttungl/SDC-term1-Advanced-Lane-Finding/blob/master/alf.gif" height="303" width="550"> -->
 
 
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/add_heatmap.png">
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG1.png">
+<!-- <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG1.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG2.png">
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG3.png">
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/data_exploration.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG3.png"> -->
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles0.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/draw_rectangles.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold_gray.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold.png">
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG1.png">
+<!-- <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG1.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG2.png">
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG3.png">
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG3.png"> -->
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_decision_tree.png">
 <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_SupportVectorMachine.png">
 
+I will consider the [rubric points]](https://review.udacity.com/#!/rubrics/513/view) individually and describe how I addressed each point in my implementation.  
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+### Histogram of Oriented Gradients (HOG)
 
----
-###Writeup / README
+#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
+I explore the datasets of `car` and `non-car` classes as below.
 
-You're reading it!
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/data_exploration.png">
 
-###Histogram of Oriented Gradients (HOG)
+Then, I use `get_hog_features()` method with `hog()` from `skimage.feature` library in `cell 7` to get the histogram of oriented gradients (HOG) features in both `car` and `non-car` classes. 
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG1.png">
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
+<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG1.png">
 
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+In the images above, I obtained the HOG features using configurations `orient`= `9`, `pix_per_cell` = `8`, `cell_per_block` = `2`. Then, extracting its features using `extract_features()` as in `cell 10`. In this method, I did try the combination of HOG features, spatial, and histogram colors, but it didn't work out due to my hardware limit (macbookpro). So, I only use HOG features. 
 
-![alt text][image1]
+I also tested with different configurations of `color_space`, `hog_channel`, `orient`, and `pix_per_cell`. The sizes of `car_features` and `noncar_features` are `8792` and `8968`, respectively. The table below shows the various extracted times for each configuration that I have explored.
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+| :------------------------------------------------------------------------------------: |
+|							Configuration Exploration									 |
+| :------------------------------------------------------------------------------------: |
+|  No.  | `color_space` | hog_channel  |  orient  |  pix_per_cell  |  Extracted Time (s) |
+| :---: | :-----------: | :----------: | :------: | :------------: | :-----------------: |
+|   1   |      RGB      |      2	   |  	8     |       8	   	   |	 30.5448		 |
+|   2   |      RGB      |  	   2	   | 	8     |       12  	   |	 22.87939		 |
+|   3   |      RGB      |      2	   |  	8     |       16  	   |	 21.77754		 |
+|   4   |      RGB      |  	   2	   | 	11    |       8		   |	 34.036		 	 |
+|   5   |      RGB      |      2	   |  	11    |       12 	   |	 23.02448		 |
+|   6   |      RGB      |  	   2	   | 	11    |       16	   |	 22.21846		 |
+|   7   |      RGB      |  	   ALL	   | 	8     |       8		   |	 71.31848		 |
+|   8   |      RGB      |      ALL	   |  	8     |       12 	   |	 49.66749		 |
+|   9   |      RGB      |  	   ALL	   | 	8     |       16	   |	 45.88498		 |
+|   10  |      RGB      |  	   ALL	   | 	11    |       8		   |	 75.53337		 |
+|   11  |      RGB      |      ALL	   |  	11    |       12 	   |	 62.8071		 |
+|   12  |      RGB      |  	   ALL	   | 	11    |       16	   |	 59.53764		 |
+|   13  |      HSV      |      2	   |  	8     |       8	   	   |	 31.24532		 |
+|   14  |      HSV      |  	   2	   | 	8     |       12  	   |	 22.53092		 |
+|   15  |      HSV      |      2	   |  	8     |       16  	   |	 21.72739		 |
+|   16  |      HSV      |  	   2	   | 	11    |       8		   |	 30.96028		 |
+|   17  |      HSV      |      2	   |  	11    |       12 	   |	 23.11023		 |
+|   18  |      HSV      |  	   2	   | 	11    |       16	   |	 22.52908		 |
+|   19  |      HSV      |  	   ALL	   | 	8     |       8		   |	 74.14904		 |
+|   20  |      HSV      |      ALL	   |  	8     |       12 	   |	 50.25714		 |
+|   21  |      HSV      |  	   ALL	   | 	8     |       16	   |	 47.83314		 |
+|   22  |      HSV      |  	   ALL	   | 	11    |       8		   |	 76.50115		 |
+|   23  |      HSV      |      ALL	   |  	11    |       12 	   |	 944.93221		 |
+|   24  |      HSV      |  	   ALL	   | 	11    |       16	   |	 60.16057		 |
+|   25  |      HLS      |      2	   |  	8     |       8	   	   |	 31.15222		 |
+|   26  |      HLS      |  	   2	   | 	8     |       12  	   |	 23.32326		 |
+|   27  |      HLS      |      2	   |  	8     |       16  	   |	 22.1619		 |
+|   28  |      HLS      |  	   2	   | 	11    |       8		   |	 32.06209		 |
+|   29  |      HLS      |      2	   |  	11    |       12 	   |	 24.07181		 |
+|   30  |      HLS      |  	   2	   | 	11    |       16	   |	 23.87908		 |
+|   31  |      HLS      |  	   ALL	   | 	8     |       8		   |	 73.75597		 |
+|   32  |      HLS      |      ALL	   |  	8     |       12 	   |	 50.81686 		 |
+|   33  |      HLS      |  	   ALL	   | 	8     |       16	   |	 45.66461		 |
+|   34  |      HLS      |  	   ALL	   | 	11    |       8		   |	 77.44444		 |
+|   35  |      HLS      |      ALL	   |  	11    |       12 	   |	 50.32718		 |
+|   36  |      HLS      |  	   ALL	   | 	11    |       16	   |	 49.44808		 |
+|   37  |      LUV      |      2	   |  	8     |       8	   	   |	 31.49909		 |
+|   38  |      LUV      |  	   2	   | 	8     |       12  	   |	 23.77771		 |
+|   39  |      LUV      |      2	   |  	8     |       16  	   |	 23.79319		 |
+|   40  |      LUV      |  	   2	   | 	11    |       8		   |	 34.82909		 |
+|   41  |      LUV      |      2	   |  	11    |       12 	   |	 26.05469		 |
+|   42  |      LUV      |  	   2	   | 	11    |       16	   |	 26.06044		 |
+|   43  |      LUV      |  	   ALL	   | 	8     |       8		   |	 75.56331		 |
+|   44  |      LUV      |      ALL	   |  	8     |       12 	   |	 49.6141 		 |
+|   45  |      LUV      |  	   ALL	   | 	8     |       16	   |	 47.20092		 |
+|   46  |      LUV      |  	   ALL	   | 	11    |       8		   |	 73.82762		 |
+|   47  |      LUV      |      ALL	   |  	11    |       12 	   |	 60.64072		 |
+|   48  |      LUV      |  	   ALL	   | 	11    |       16	   |	 54.12637		 |
+|   49  |      YUV      |      2	   |  	8     |       8	   	   |	 28.5655		 |
+|   50  |      YUV      |  	   2	   | 	8     |       12  	   |	 21.32812		 |
+|   51  |      YUV      |      2	   |  	8     |       16  	   |	 22.29023		 |
+|   52  |      YUV      |  	   2	   | 	11    |       8		   |	 31.1985		 |
+|   53  |      YUV      |      2	   |  	11    |       12 	   |	 24.73312		 |
+|   54  |      YUV      |  	   2	   | 	11    |       16	   |	 22.23977		 |
+|   55  |      YUV      |  	   ALL	   | 	8     |       8		   |	 73.98175		 |
+|   56  |      YUV      |      ALL	   |  	8     |       12 	   |	 48.06844 		 |
+|   57  |      YUV      |  	   ALL	   | 	8     |       16	   |	 45.44458		 |
+|   58  |      YUV      |  	   ALL	   | 	11    |       8		   |	 74.28496		 |
+|   59  |      YUV      |      ALL	   |  	11    |       12 	   |	 53.30763		 |
+|   60  |      YUV      |  	   ALL	   | 	11    |       16	   |	 46.96956		 |
+|   61  |      YCrCb    |      2	   |  	8     |       8	   	   |	 29.37965		 |
+|   62  |      YCrCb    |  	   2	   | 	8     |       12  	   |	 24.49854		 |
+|   63  |      YCrCb    |      2	   |  	8     |       16  	   |	 22.22448		 |
+|   64  |      YCrCb    |  	   2	   | 	11    |       8		   |	 33.09982		 |
+|   65  |      YCrCb    |      2	   |  	11    |       12 	   |	 24.07404		 |
+|   66  |      YCrCb    |  	   2	   | 	11    |       16	   |	 22.83741		 |
+|   67  |      YCrCb    |  	   ALL	   | 	8     |       8		   |	 76.33727		 |
+|   68  |      YCrCb    |      ALL	   |  	8     |       12 	   |	 51.09298 		 |
+|   69  |      YCrCb    |  	   ALL	   | 	8     |       16	   |	 47.65726		 |
+|   70  |      YCrCb    |  	   ALL	   | 	11    |       8		   |	 80.50953		 |
+|   71  |      YCrCb    |      ALL	   |  	11    |       12 	   |	 56.51481		 |
+|   72  |      YCrCb    |  	   ALL	   | 	11    |       16	   |	 53.57784		 |
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-
-![alt text][image2]
 
 ####2. Explain how you settled on your final choice of HOG parameters.
+I 
+I tried various combinations of parameters with training process using SVM classifier and then I obtained the prediction time of the SVM classifier as below. 
 
-I tried various combinations of parameters and...
+| :---------------------------------------------------------------------: |
+|		   			SVM classifier (LinearSVC)				   			  |
+| :---------------------------------------------------------------------: |
+|  No.  | `Test Accuracy (s)` | Training time (s)  |  Prediction time (s) | 
+| :---: | :-----------------: | :----------------: | :------------------: | 
+|   1   |					  |	                   |                      |
+|   2   |					  |	                   |                      |
+|   3   |					  |	                   |                      |
+|   4   |					  |	                   |                      |
+|   5   |					  |	                   |                      |
+|   6   |					  |	                   |                      |
+|   7   |					  |	                   |                      |
+|   8   |					  |	                   |                      |
+|   9   |					  |	                   |                      |
+|   10  |					  |	                   |                      |
+|   11  |					  |	                   |                      |
+|   12  |					  |	                   |                      |
+
+|   13  |					  |	                   |                      |
+|   14  |					  |	                   |                      |
+|   15  |					  |	                   |                      |
+|   16  |					  |	                   |                      |
+|   17  |					  |	                   |                      |
+|   18  |					  |	                   |                      |
+|   19  |					  |	                   |                      |
+|   20  |					  |	                   |                      |
+|   21  |					  |	                   |                      |
+|   22  |					  |	                   |                      |
+|   23  |					  |	                   |                      |
+|   24  |					  |	                   |                      |
+
+|   25  |					  |	                   |                      |
+|   26  |					  |	                   |                      |
+|   27  |					  |	                   |                      |
+|   28  |					  |	                   |                      |
+|   29  |					  |	                   |                      |
+|   30  |					  |	                   |                      |
+|   31  |					  |	                   |                      |
+|   32  |					  |	                   |                      |
+|   33  |					  |	                   |                      |
+|   34  |					  |	                   |                      |
+|   35  |					  |	                   |                      |
+|   36  |					  |	                   |                      |
+
+|   37  |					  |	                   |                      |
+|   38  |					  |	                   |                      |
+|   39  |					  |	                   |                      |
+|   40  |					  |	                   |                      |
+|   41  |					  |	                   |                      |
+|   42  |					  |	                   |                      |
+|   43  |					  |	                   |                      |
+|   44  |					  |	                   |                      |
+|   45  |					  |	                   |                      |
+|   46  |					  |	                   |                      |
+|   47  |					  |	                   |                      |
+|   48  |					  |	                   |                      |
+
+|   49  |					  |	                   |                      |
+|   50  |					  |	                   |                      |
+|   51  |					  |	                   |                      |
+|   52  |					  |	                   |                      |
+|   53  |					  |	                   |                      |
+|   54  |					  |	                   |                      |
+|   55  |					  |	                   |                      |
+|   56  |					  |	                   |                      |
+|   57  |					  |	                   |                      |
+|   58  |					  |	                   |                      |
+|   59  |					  |	                   |                      |
+|   60  |					  |	                   |                      |
+
+|   61  |					  |	                   |                      |
+|   62  |					  |	                   |                      |
+|   63  |					  |	                   |                      |
+|   64  |					  |	                   |                      |
+|   65  |					  |	                   |                      |
+|   66  |					  |	                   |                      |
+|   67  |					  |	                   |                      |
+|   68  |					  |	                   |                      |
+|   69  |					  |	                   |                      |
+|   70  |					  |	                   |                      |
+|   71  |					  |	                   |                      |
+|   72  |					  |	                   |                      |
+
+
+
+
+
+
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
