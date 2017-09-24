@@ -34,9 +34,9 @@ I explore the datasets of `car` and `non-car` classes as below.
 
 Then, I use `get_hog_features()` method with `hog()` from `skimage.feature` library in `cell 7` to get the histogram of oriented gradients (HOG) features in both `car` and `non-car` classes. 
 
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG1.png">
+<img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/car_HOG1.png">
 
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG1.png">
+<img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/noncar_HOG1.png">
 
 In the images above, I obtained the HOG features using configurations `orient`= `9`, `pix_per_cell` = `8`, `cell_per_block` = `2`. Then, extracting its features using `extract_features()` as in `cell 10`. In this method, I did try the combination of HOG features, spatial, and histogram colors, but it didn't work out due to my hardware limit (macbookpro). So, I only use HOG features. 
 
@@ -212,22 +212,22 @@ As shown in `cell 15`, I first created a classifier using `LinearSVC()`. Then, I
 
 The sliding window search method is inherited from `find_cars()` method from the lesson. The method extracts the individual channel HOG features for the entire image, then the full image features are subsampled to the window size to feed to the classifier. 
 
-<img width="250" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window.png"> <img width="250" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">  <img width="250" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png"> 
+<img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window1.png">  <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window2.png"> 
 
 <!-- <img width="320" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/slide_window3.png"> -->
 
-<img width="550" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles.png">
+<img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles.png">
 
 <!-- <img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/detected_rectangles0.png"> -->
 
-<img width="250" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/add_heatmap.png"> <img width="250" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold.png"> <img width="250" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold_gray.png"> 
+<img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/add_heatmap.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold.png"> <img width="290" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/heatmap_threshold_gray.png"> 
 
-<img width="550" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/draw_rectangles.png">
+<img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/draw_rectangles.png">
 
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-<img width="750" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_SupportVectorMachine.png">
+<img width="650" src="https://github.com/ttungl/SDC-term1-Vehicle-Detection-and-Tracking/blob/master/output_images/SVC_SupportVectorMachine.png">
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
